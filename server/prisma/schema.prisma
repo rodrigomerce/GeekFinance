@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator erd {
+  provider = "prisma-erd-generator"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Cadastro {
+  id         String   @id @default(uuid())
+  cad_user   String
+  cad_pass   String
+  created_at DateTime
+
+  @@map("cadastro")
+}
+
+model Tarefas {
+  id          String   @id @default(uuid())
+  t_descricao String
+  cad_id      String
+  created_at  DateTime
+
+  @@map("tarefas")
+}
+
+model Aporte {
+  id           String   @id @default(uuid())
+  a_nome       String
+  a_valor      String
+  a_tipo       String
+  a_observacao String
+  created_at   DateTime
+
+  @@map("aportes")
+}
